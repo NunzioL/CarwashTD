@@ -12,7 +12,7 @@ class Enemy:
         self.animation_count = 0
         self.dirt = 3
         self.velocity = 3
-        self.path = [(5, 420), (722, 198), (597, 198), (597, 97), (103, 97), (103, 352), (216, 352), (216, 235),
+        self.path = [(5, 420), (722, 420), (597, 198), (597, 97), (103, 97), (103, 352), (216, 352), (216, 235),
                      (306, 235), (306, 351), (400, 351), (400, 234), (494, 234), (494, 474), (607, 474), (607, 316),
                      (722, 316), (722, 567), (379, 567), (379, 466), (4, 466)]
         self.x = self.path[0][0]
@@ -71,43 +71,45 @@ class Enemy:
         """
 
         self.animation_count += 1
-        if self.animation_count >= len(self.images):
+        if self.animation_count >= len(self.imgs):
             self.animation_count = 0
 
-        x1, y1 = self.path[self.path_position]
-        if self.path_position + 1 >= len(self.path):
+        x1, y1 = self.path[self.path_pos]
+        if self.path_pos + 1 >= len(self.path):
             x2, y2 = (-10, 355)
         else:
-            x2, y2 = self.path[self.path_position + 1]
+            x2, y2 = self.path[self.path_pos + 1]
 
         dirn = ((x2 - x1) * 2, (y2 - y1) * 2)
         length = math.sqrt((dirn[0]) ** 2 + (dirn[1]) ** 2)
         dirn = (dirn[0] / length, dirn[1] / length)
 
-        if dirn[0] < 0 and not self.flipped:
+        if dirn[0] < 0 and not (self.flipped):
             self.flipped = True
-            for x, img in enumerate(self.images):
-                self.images[x] = pygame.transform.flip(img, True, False)
+            for x, img in enumerate(self.imgs):
+                self.imgs[x] = pygame.transform.flip(img, True, False)
 
         move_x, move_y = ((self.x + dirn[0]), (self.y + dirn[1]))
 
         self.x = move_x
         self.y = move_y
 
+        # Go to next point
         if dirn[0] >= 0:  # moving right
             if dirn[1] >= 0:  # moving down
                 if self.x >= x2 and self.y >= y2:
-                    self.path_position += 1
+                    self.path_pos += 1
             else:
                 if self.x >= x2 and self.y <= y2:
-                    self.path_position += 1
+                    self.path_pos += 1
         else:  # moving left
             if dirn[1] >= 0:  # moving down
                 if self.x <= x2 and self.y >= y2:
-                    self.path_position += 1
+                    self.path_pos += 1
             else:
                 if self.x <= x2 and self.y >= y2:
-                    self.path_position += 1
+                    self.path_pos += 1
+
 
     def wash(self, damage):
         """
