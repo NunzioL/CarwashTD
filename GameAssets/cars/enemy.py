@@ -23,6 +23,7 @@ class Enemy:
         self.flipped = False
         self.max_dirt = 5
         self.speed_increase = 1.2
+        self.visible = True
 
 
     def draw(self, win):
@@ -32,10 +33,11 @@ class Enemy:
         :return: none
         """
 
-        self.img = self.images[self.animation_count]
+        if self.visible:
+            self.img = self.images[self.animation_count]
 
-        win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2))
-        self.draw_health_bar(win)
+            win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2))
+            self.draw_health_bar(win)
 
     def draw_health_bar(self, win):
         """
@@ -67,16 +69,22 @@ class Enemy:
         Move enemy
         :return: none
         """
-        if self.x < self.path[self.path_pos][0]:
-            self.x += 1
-        elif self.x > self.path[self.path_pos][0]:
-            self.x -= 1
-        if self.y < self.path[self.path_pos][1]:
-            self.y += 1
-        elif self.y > self.path[self.path_pos][1]:
-            self.y -= 1
-        if self.x == self.path[self.path_pos][0] and self.y == self.path[self.path_pos][1]:
-            self.path_pos += 1
+        if self.visible:
+            if self.x < self.path[self.path_pos][0]:
+                self.x += 1
+            elif self.x > self.path[self.path_pos][0]:
+                self.x -= 1
+            if self.y < self.path[self.path_pos][1]:
+                self.y += 1
+            elif self.y > self.path[self.path_pos][1]:
+                self.y -= 1
+            if self.x == self.path[self.path_pos][0] and self.y == self.path[self.path_pos][1]:
+                self.path_pos += 1
+                if self.path_pos >= len(self.path):
+                    self.visible = False
+
+        # if self.x == self.path[self.path_pos][7]:
+
     """
         self.animation_count += 1
         if self.animation_count >= len(self.imgs):
