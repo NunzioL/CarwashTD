@@ -10,9 +10,9 @@ class Enemy:
         self.width = 64
         self.height = 64
         self.animation_count = 0
-        self.dirt = 3
+        self.dirt = 5
         self.velocity = 3
-        self.path = [(5, 385), (129, 385), (129, 173), (291, 173), (291, 450), (505, 450)]
+        self.path = [(5, 385), (129, 385), (129, 173), (291, 173), (291, 450), (505, 450), (505,312), (800,312)]
         self.x = self.path[0][0]
         self.y = self.path[0][1]
         self.dis = 0
@@ -67,7 +67,17 @@ class Enemy:
         Move enemy
         :return: none
         """
-
+        if self.x < self.path[self.path_pos][0]:
+            self.x += 1
+        elif self.x > self.path[self.path_pos][0]:
+            self.x -= 1
+        if self.y < self.path[self.path_pos][1]:
+            self.y += 1
+        elif self.y > self.path[self.path_pos][1]:
+            self.y -= 1
+        if self.x == self.path[self.path_pos][0] and self.y == self.path[self.path_pos][1]:
+            self.path_pos += 1
+    """
         self.animation_count += 1
         if self.animation_count >= len(self.imgs):
             self.animation_count = 0
@@ -106,8 +116,7 @@ class Enemy:
                     self.path_pos += 1
             else:
                 if self.x <= x2 and self.y >= y2:
-                    self.path_pos += 1
-
+                    self.path_pos += 1"""
 
     def wash(self, damage):
         """

@@ -35,6 +35,7 @@ class Game:
             # loop through enemies
             to_del = []
             for en in self.enemies:
+                en.move()
                 if en.x < -5:
                     to_del.append(en)
 
