@@ -4,7 +4,7 @@ import os
 
 
 class Enemy:
-    images = []
+    imgs = []
 
     def __init__(self):
         self.width = 64
@@ -12,16 +12,14 @@ class Enemy:
         self.animation_count = 0
         self.dirt = 3
         self.velocity = 3
-        self.path = [(5, 420), (722, 420), (597, 198), (597, 97), (103, 97), (103, 352), (216, 352), (216, 235),
-                     (306, 235), (306, 351), (400, 351), (400, 234), (494, 234), (494, 474), (607, 474), (607, 316),
-                     (722, 316), (722, 567), (379, 567), (379, 466), (4, 466)]
+        self.path = [(5, 385), (129, 385), (129, 173), (291, 173), (291, 450), (505, 450)]
         self.x = self.path[0][0]
         self.y = self.path[0][1]
         self.dis = 0
         self.path_pos = 0
         self.move_count = 0
         self.move_dis = 0
-        self.images = []
+        self.imgs = []
         self.flipped = False
         self.max_dirt = 5
         self.speed_increase = 1.2
@@ -36,7 +34,7 @@ class Enemy:
 
         self.img = self.images[self.animation_count]
 
-        win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2 - 35))
+        win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2))
         self.draw_health_bar(win)
 
     def draw_health_bar(self, win):
@@ -129,6 +127,6 @@ class Enemy:
         self.path_position = 0
         self.move_count = 0
         self.move_distance = 0
-        self.images = []
+        self.imgs = []
         self.flipped = False
         self.max_dirt = 0

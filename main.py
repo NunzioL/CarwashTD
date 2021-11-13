@@ -29,7 +29,8 @@ class Game:
                 pos = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONDOWN :
-                    pass
+                    self.clicks.append(pos)
+                    print(pos)
 
             # loop through enemies
             to_del = []

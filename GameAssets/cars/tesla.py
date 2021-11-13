@@ -2,12 +2,12 @@ import pygame
 import os
 from .enemy import Enemy
 
-images = []
+imgs = []
 for x in range(20):
     add_str = str(x)
     if x < 10:
         add_str = "0" + add_str
-    images.append(pygame.transform.scale(
+    imgs.append(pygame.transform.scale(
         pygame.image.load(os.path.join("GameAssets", "cars", "tesla_model3.png")),
         (64, 64)))
 
