@@ -4,7 +4,6 @@ import os
 
 
 class Enemy:
-    imgs = []
 
     def __init__(self):
         self.width = 64
@@ -19,12 +18,10 @@ class Enemy:
         self.path_pos = 0
         self.move_count = 0
         self.move_dis = 0
-        self.imgs = []
         self.flipped = False
         self.max_dirt = 5
         self.speed_increase = 1.2
         self.visible = True
-
 
     def draw(self, win):
         """
@@ -49,10 +46,6 @@ class Enemy:
             self.draw_health_bar(win)
 
             # pygame.draw.line(win, (1, 0, 0), (self.x, self.y), self.path[self.path_pos])
-
-
-
-
 
     def draw_health_bar(self, win):
         """
@@ -100,47 +93,6 @@ class Enemy:
 
         # if self.x == self.path[self.path_pos][7]:
 
-    """
-        self.animation_count += 1
-        if self.animation_count >= len(self.imgs):
-            self.animation_count = 0
-
-        x1, y1 = self.path[self.path_pos]
-        if self.path_pos + 1 >= len(self.path):
-            x2, y2 = (-10, 355)
-        else:
-            x2, y2 = self.path[self.path_pos + 1]
-
-        dirn = ((x2 - x1) * 2, (y2 - y1) * 2)
-        length = math.sqrt((dirn[0]) ** 2 + (dirn[1]) ** 2)
-        dirn = (dirn[0] / length, dirn[1] / length)
-
-        if dirn[0] < 0 and not (self.flipped):
-            self.flipped = True
-            for x, img in enumerate(self.imgs):
-                self.imgs[x] = pygame.transform.flip(img, True, False)
-
-        move_x, move_y = ((self.x + dirn[0]), (self.y + dirn[1]))
-
-        self.x = move_x
-        self.y = move_y
-
-        # Go to next point
-        if dirn[0] >= 0:  # moving right
-            if dirn[1] >= 0:  # moving down
-                if self.x >= x2 and self.y >= y2:
-                    self.path_pos += 1
-            else:
-                if self.x >= x2 and self.y <= y2:
-                    self.path_pos += 1
-        else:  # moving left
-            if dirn[1] >= 0:  # moving down
-                if self.x <= x2 and self.y >= y2:
-                    self.path_pos += 1
-            else:
-                if self.x <= x2 and self.y >= y2:
-                    self.path_pos += 1"""
-
     def wash(self, damage):
         """
         Returns true if a car is clean and removes one dirt
@@ -159,6 +111,5 @@ class Enemy:
         self.path_position = 0
         self.move_count = 0
         self.move_distance = 0
-        self.imgs = []
         self.flipped = False
         self.max_dirt = 0

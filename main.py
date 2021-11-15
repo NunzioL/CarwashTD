@@ -1,6 +1,7 @@
 import pygame
 import os
 from GameAssets.cars.tesla import Tesla
+from GameAssets.Menu.menu import TowerButton
 
 
 class Game:
@@ -9,7 +10,7 @@ class Game:
         self.height = 700
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = [Tesla()]
-        self.towers = []
+        self.towers = [TowerButton()]
         self.lives = 10
         self.money = 100
         # load the background image
@@ -32,6 +33,10 @@ class Game:
                     self.clicks.append(pos)
                     print(pos)
 
+            #listen for button
+            for tow in self.towers:
+                tow.click()
+
             # loop through enemies
             to_del = []
             for en in self.enemies:
@@ -50,6 +55,10 @@ class Game:
     def draw(self):
         self.win.fill((0, 0, 0))
         self.win.blit(self.background, (0, 0))
+
+        #draw button
+        for tow in self.towers:
+            tow.draw(self.win)
 
         # draw enemies
         for en in self.enemies:
