@@ -2,7 +2,7 @@ import pygame
 from GameAssets.Towers import Tower
 import os
 import math
-from GameAssets.Menu.menu import Menu
+from GameAssets.Menu.menu import TowerButton
 
 
 menu_bg = pygame.transform.scale(pygame.image.load(os.path.join("game_assets", "menu.png")).convert_alpha(), (120, 70))
@@ -12,8 +12,9 @@ upgrade_btn = pygame.transform.scale(pygame.image.load(os.path.join("game_assets
 catapult_imgs1 = []
 
 # load catapult image
-for x in range(37,43):
-    pygame.image.load(os.path.join("GameAssets", "Towers", "Catapult.png")).convert_alpha(),(90,90)))
+"""for x in range(37,43):
+    pygame.image.load(os.path.join("GameAssets", "Towers", "Catapult.png")).convert_alpha(),(90,90)))"""
+
 
 
 class catapultTowerLong(Tower):
@@ -31,7 +32,7 @@ class catapultTowerLong(Tower):
         self.moving = False
         self.name = "catapult"
 
-        self.menu = Menu(self, self.x, self.y, menu_bg, [2000, 5000,"MAX"])
+        # self.menu = TowerButton(self, self.x, self.y, menu_bg, [2000, 5000,"MAX"])
         self.menu.add_btn(upgrade_btn, "Upgrade")
 
 
