@@ -143,7 +143,7 @@ class Enemy:
 
     def wash(self, damage):
         """
-        Returns if a car is clean and removes one dirt
+        Returns true if a car is clean and removes one dirt
         each call
         :return: bool
         """
