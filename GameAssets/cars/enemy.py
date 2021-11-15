@@ -36,8 +36,23 @@ class Enemy:
         if self.visible:
             self.img = self.images[self.animation_count]
 
+            if self.x < self.path[self.path_pos][0]:
+               self.img = pygame.transform.rotate(self.img, 0)
+            elif self.x > self.path[self.path_pos][0]:
+               self.img = pygame.transform.rotate(self.img, 180)
+            if self.y < self.path[self.path_pos][1]:
+               self.img = pygame.transform.rotate(self.img, -90)
+            elif self.y > self.path[self.path_pos][1]:
+               self.img = pygame.transform.rotate(self.img, 90)
+
             win.blit(self.img, (self.x - self.img.get_width() / 2, self.y - self.img.get_height() / 2))
             self.draw_health_bar(win)
+
+            # pygame.draw.line(win, (1, 0, 0), (self.x, self.y), self.path[self.path_pos])
+
+
+
+
 
     def draw_health_bar(self, win):
         """

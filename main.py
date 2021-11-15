@@ -48,6 +48,7 @@ class Game:
         pygame.quit()
 
     def draw(self):
+        self.win.fill((0, 0, 0))
         self.win.blit(self.background, (0, 0))
 
         # draw enemies
