@@ -23,7 +23,9 @@ class Game:
         self.catapult_cost = 50
         self.FPS = 30
         self.num_catapults = 0
-
+        self.max_cars = 5
+        self.car_timer = 10000
+        self.last_car = pygame.time.get_ticks()
         # Score
         pygame.font.init()
         self.font = pygame.font.SysFont('freesansbold.ttf', 32)
@@ -88,6 +90,12 @@ class Game:
             # listen for button
             for but in self.buttons:
                 but.click()
+
+            #create wave of teslas
+            if len(self.enemies) < self.max_cars:
+                if pygame.time.get_ticks() - self.last_car > self.car_timer:
+                    self.enemies.append(Tesla())
+                    self.last_car = pygame.time.get_ticks()
 
             # loop through enemies
             to_del = []
