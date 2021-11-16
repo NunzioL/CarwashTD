@@ -1,10 +1,9 @@
 import pygame
-import os
 import sys
 
 class TowerButton:
     def __init__(self):
-        self.catapult = pygame.image.load(os.path.join("GameAssets", "Towers", "Catapult.png"))
+        self.catapult = pygame.image.load('GameAssets/Towers/Catapult.png')
         self.catapult = pygame.transform.scale(self.catapult, (100, 100))
         self.x = 800
         self.y = 100
@@ -34,6 +33,10 @@ class TowerButton:
                 self.clicked = False
                 print('UNCLICKED')
 
-#clicked back to false if elsewhere is clicked
+        return self.clicked
 
-#if button is clicked and
+# clicked back to false if elsewhere is clicked
+
+# if clicked value is true tower can be placed
+# once elsewhere is clicked value is set back to false so another tower can be placed
+
