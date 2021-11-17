@@ -3,10 +3,10 @@ import sys
 import math
 
 
-class Enemy(pygame.sprite.Sprite):
+class Enemy():
 
     def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
+        self.catapult_count = 0
         self.dirty = True
         self.dirt = 5
         self.path = [(5, 385), (129, 385), (129, 173), (291, 173), (291, 450), (505, 450), (505,312), (800,312)]
@@ -16,6 +16,9 @@ class Enemy(pygame.sprite.Sprite):
         self.max_dirt = 5
         self.visible = True
        # catapult_count = 0
+
+    def set(self):
+        self.catapult_count += 1
 
 
 
@@ -84,24 +87,19 @@ class Enemy(pygame.sprite.Sprite):
                 if self.path_pos >= len(self.path):
                     self.visible = False
 
-    def wash(self, damage):
+    def wash(self):
         """
-        Returns true if a car is clean and removes one dirt
+        Returns if a car is visible and removes one dirt if it takes damage
         each call
         :return: bool
         """
+        if self.catapult_count >= 1:
+            self.dirt -= self.catapult_count
 
-        """if pygame.MOUSEBUTTONDOWN:
-            catapult_count += 1
+        if self.dirt > 0:
+            self.visible = True
+        else:
+            self.visible = False
 
-        cooldown = pygame.time.Clock()
 
-        damage += catapult_count  # number of catapults
 
-        self.dirt -= damage
-        if self.dirt <= 0:
-            return True
-        return False
-
-        cooldown.tick(2000)
-        """

@@ -22,11 +22,12 @@ class Game:
         self.catapults = pygame.sprite.Group()
         self.catapult_cost = 50
         self.FPS = 30
-        self.num_catapults = 0
+        self.catapult_count = 0
         self.max_cars = 5
+        self.damage = 0
         self.car_timer = 10000
         self.last_car = pygame.time.get_ticks()
-        # Score
+        # Score, lives, price font
         pygame.font.init()
         self.font = pygame.font.SysFont('freesansbold.ttf', 32)
 
@@ -59,15 +60,22 @@ class Game:
         catapult.reload_img()
         catapult.angle = degs
         catapult.image = pygame.transform.rotate(catapult.image, degs)
+        #pygame.time.set_timer(enemy.wash, 2000)
 
+    def wash_event(self):
+        for en in self.enemies:
+            en.wash()
     # game loop
     def runGame(self):
-        global num_catapults
         runGame = True
         clock = pygame.time.Clock()
+
+        pygame.time.set_timer(pygame.USEREVENT, 2000)
         while runGame:
             clock.tick(self.FPS)
             for event in pygame.event.get():
+                if event.type == pygame.USEREVENT:
+                    self.wash_event()
                 if event.type == pygame.QUIT:
                     runGame = False
 
@@ -86,6 +94,11 @@ class Game:
                         new_catapult = Catapult(pos[0], pos[1])
                         self.catapults.add(new_catapult)
                         self.money -= self.catapult_cost
+                        self.catapult_count += 1
+                        for en in self.enemies:
+                            en.set()
+
+                        #Enemy.wash(Enemy(), damage=1)
 
             # listen for button
             for but in self.buttons:
@@ -101,8 +114,13 @@ class Game:
             to_del = []
             for en in self.enemies:
                 en.move()
-                if en.x < -5:
+                if en.x == 800:
+                    # subtract a life if car reaches the end of the track still dirty
+                    if en.dirt > 0:
+                        self.lives -= 1
                     to_del.append(en)
+
+
 
             # delete all enemies off the screen
             for d in to_del:
@@ -111,8 +129,9 @@ class Game:
             self.draw()
 
             #if player is out of lives display game over and exit loop
-            if self.lives == 0:
-                self.end_game(400, 350)
+            if self.lives <= 0:
+                print("Game over")
+                runGame = False
 
         pygame.quit()
 

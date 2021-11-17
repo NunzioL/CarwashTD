@@ -14,6 +14,7 @@ class Catapult(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
+        self.damage = 1
 
     def shoot_angle(self):
         from math import atan2, degrees, pi
