@@ -65,6 +65,7 @@ class Game:
     def wash_event(self):
         for en in self.enemies:
             en.wash()
+
     # game loop
     def runGame(self):
         runGame = True
@@ -83,9 +84,7 @@ class Game:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.clicks.append(pos)
-                   # print(pos)
                     pixel_color = self.win.get_at(pos)
-                   # print(self.win.get_at(pos))
 
                     # towers can only be placed on green surface
                     #if 80 < pixel_color[0] > 100 and 105 < pixel_color[1] > 120 and 15 < pixel_color[2] > 30 and self.money >= self.catapult_cost:
@@ -103,6 +102,11 @@ class Game:
             # listen for button
             for but in self.buttons:
                 but.click()
+
+            """for en in self.enemies:
+                if en.destroyed:
+                    self.money += 100
+                    en.destroyed = False"""
 
             #create wave of teslas
             if len(self.enemies) < self.max_cars:

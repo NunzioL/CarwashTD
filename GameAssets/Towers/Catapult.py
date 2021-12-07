@@ -32,10 +32,5 @@ class Catapult(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
-    def shoot(self):
-        cooldown = pygame.time.Clock()
-        cooldown.tick(2000)
-        for bloon in waterBalloon:
-            bloon.draw(self.win)
 
 

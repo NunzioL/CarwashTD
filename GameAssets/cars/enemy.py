@@ -3,7 +3,7 @@ import sys
 import math
 
 
-class Enemy():
+class Enemy:
 
     def __init__(self):
         self.catapult_count = 0
@@ -15,13 +15,10 @@ class Enemy():
         self.path_pos = 0
         self.max_dirt = 5
         self.visible = True
-       # catapult_count = 0
+        self.destroyed = False
 
     def set(self):
         self.catapult_count += 1
-
-
-
 
     def draw(self, win):
         """
@@ -54,6 +51,9 @@ class Enemy():
             #self.wash(0)
 
             # pygame.draw.line(win, (1, 0, 0), (self.x, self.y), self.path[self.path_pos])
+
+        elif not self.visible:
+            self.destroyed = True
 
     def draw_health_bar(self, win):
         """
@@ -100,6 +100,8 @@ class Enemy():
             self.visible = True
         else:
             self.visible = False
+
+
 
 
 

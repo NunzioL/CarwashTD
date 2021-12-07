@@ -10,7 +10,7 @@ class Tesla(Enemy):
         self.money = 50
         self.max_dirt = 5
         self.dirt = self.max_dirt
-        self.image = pygame.image.load('GameAssets/cars/tesla_model3.png')
+        self.image = pygame.image.load('GameAssets/cars/tesla_model3_dirty.png')
         self.image = pygame.transform.scale(self.image, (110, 64))
         self.image_clean = pygame.image.load('GameAssets/cars/tesla_model3_clean.png')
         self.image_clean = pygame.transform.scale(self.image_clean, (110, 64))
